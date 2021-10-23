@@ -51,14 +51,15 @@ function SignIn() {
 
   return (
     <>
-      <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>  </>
+      <center><button className="sign-in" class="btn btn-primary" onClick={signInWithGoogle} style={({ marginTop: '0.8rem' })}>Login!</button>
+      <p style={({ marginTop: '0.8rem' })}>Login with google to chat about bedwars with some super amazing minecrafters!</p> </center> </>
   )
 
 }
 
 function SignOut() {
   return auth.currentUser && (
-    <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
+    <center><button class="btn btn-danger" onClick={() => auth.signOut()} style={({ marginTop: '0.8rem', marginLeft: '0.8rem' })}>Sign Out</button></center>
   )
 }
 
@@ -98,13 +99,13 @@ function ChatRoom() {
 
     </main>
 
-    <form onSubmit={sendMessage}>
+    <center><form onSubmit={sendMessage}>
 
-      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
+      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice"  class="form-control" style={({ width: 500 })}/>
 
-      <button type="submit" disabled={!formValue}>send</button>
+      <button type="submit" class="btn btn-success" disabled={!formValue} style={({ margin: '0.8%',})}>send</button>
 
-    </form>
+    </form></center>
   </>)
 }
 
@@ -115,10 +116,10 @@ function ChatMessage(props) {
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
   return (<>
-    <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+    <center><div className={`message ${messageClass}`}>
+      <img style={({ marginTop: '0.8%' })} src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
       <p>{text}</p>
-    </div>
+    </div></center>
   </>)
 }
 
