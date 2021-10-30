@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
-
+import login from './login.png';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -51,15 +51,21 @@ function SignIn() {
 
   return (
     <>
-      <center><button className="sign-in" class="btn btn-primary" onClick={signInWithGoogle} style={({ marginTop: '0.8rem' })}>Login!</button>
-      <p style={({ marginTop: '0.8rem' })}>Login with google to chat about bedwars with some super amazing minecrafters!</p> </center> </>
+      <center><button className="sign-in" class="login-btn" onClick={signInWithGoogle} style={({ marginTop: '0.8rem' })}>Login</button></center>
+      <div class="login-stuff">
+        <img src={login} class="login-png" />
+        <center><p class="login-p" style={({})}>Login with google to chat about bedwars 🛏️ with some super amazing minecrafters!
+          Please don't violate 😡 this community, if you do so your account will be terminated.
+          If you like this website consider <a href="https://github.com/nfhneevns/bedwars-chat" class="starring">starring</a> 🌟 it on github.</p> </center>
+      </div>
+    </>
   )
 
 }
 
 function SignOut() {
   return auth.currentUser && (
-    <center><button class="btn btn-danger" onClick={() => auth.signOut()} style={({ marginTop: '0.8rem', marginLeft: '0.8rem' })}>Sign Out</button></center>
+    <center><button class="sign-out" onClick={() => auth.signOut()} style={({ marginTop: '0.8rem', marginLeft: '0.8rem' })}>Logout</button></center>
   )
 }
 
@@ -101,9 +107,9 @@ function ChatRoom() {
 
     <center><form onSubmit={sendMessage}>
 
-      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice"  class="form-control" style={({ width: 500 })}/>
+      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" class="input" style={({ width: 500 })} />
 
-      <button type="submit" class="btn btn-success" disabled={!formValue} style={({ margin: '0.8%',})}>send</button>
+      <button type="submit" class="send" disabled={!formValue} style={({ margin: '0.8%'})}>send</button>
 
     </form></center>
   </>)
@@ -117,11 +123,10 @@ function ChatMessage(props) {
 
   return (<>
     <center><div className={`message ${messageClass}`}>
-      <img style={({ marginTop: '0.8%' })} src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-      <p>{text}</p>
+      <img class="pic" style={({ marginTop: '0.8%' })} src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+      <p class="message">{text}</p>
     </div></center>
   </>)
 }
-
 
 export default App;

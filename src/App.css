@@ -1,14 +1,119 @@
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+ .login-btn {
+  background-color: #665df5;
+  height: 50px;
+  width: 100px;
+  color: white;
+  border: none;
+  font-family: 'mulish', sans-serif;
+  font-size: large;
+  cursor: pointer
 }
 
-img {
+
+.login-stuff {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+}
+
+
+.login-png {
+  flex: 50%;
+  height: 45%;
+  width: 45%;
+}
+
+.login-p {
+  flex: 50%;
+  font-family: 'mulish', sans-serif;
+  font-size: 30px;
+  margin-top: 17%;
+  margin-right: 10%;
+}
+
+.starring {
+ cursor: alias;
+}
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+/* main */
+
+.input {
+  background-color: transparent;
+    color: black;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid black 2px;
+    padding: 3px 10px;
+    font-size: 1.5rem;
+}
+
+.send{
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.sign-out {
+  background-color: #00BFA6;
+  height: 50px;
+  width: 100px;
+  color: white;
+  border: none;
+  font-family: 'mulish', sans-serif;
+  font-size: large;
+  cursor: pointer
+}
+
+ul, li {
+  text-align: left;
+  list-style: none;
+}
+
+.message {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  text-align: center;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: #536DFE;
+  align-self: flex-end;
+}
+.received p {
+  background: #F9A826;
+  color: white;
+}
+
+.pic {
   width: 40px;
   height: 40px;
-  border-radius: 10%;
-  margin-left: auto;
-    margin-right: auto;
-
+  border-radius: 50%;
+  margin: 2px 5px;
+  border: 2px solid black;
 }
-
