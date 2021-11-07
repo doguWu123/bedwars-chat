@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
-import login from './login.png';
+import { GeistProvider, CssBaseline, Themes } from '@geist-ui/react'
+import { Github } from '@geist-ui/react-icons'
+import { Button, Text, Spacer, Grid, Input } from '@geist-ui/react'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import 'firebase/analytics';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -21,10 +22,25 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-const analytics = firebase.analytics();
 
+const Theme = () => {
+  const [themeType, setThemeType] = useState('light')
+  const switchThemes = () => {
+    setThemeType(last => (last === 'dark' ? 'light' : 'dark'))
+  }
+  return (
+    <GeistProvider themeType={themeType}>
+      <CssBaseline />
+      <switchThemes onClick={switchThemes} />
+    </GeistProvider>
+  )
+}
 
 function App() {
+  const [themeType, setThemeType] = useState('dark')
+  const switchThemes = () => {
+    setThemeType(last => (last === 'dark' ? 'dark' : 'light'))
+  }
 
   const [user] = useAuthState(auth);
 
@@ -36,11 +52,17 @@ function App() {
 
       <section>
         {user ? <ChatRoom /> : <SignIn />}
+        <GeistProvider themeType={themeType}>
+          <CssBaseline />
+          <switchThemes onClick={switchThemes} />
+        </GeistProvider>
       </section>
 
     </div>
   );
 }
+
+
 
 function SignIn() {
 
@@ -51,13 +73,17 @@ function SignIn() {
 
   return (
     <>
-      <center><button className="sign-in" class="login-btn" onClick={signInWithGoogle} style={({ marginTop: '0.8rem' })}>Login</button></center>
-      <div class="login-stuff">
-        <img src={login} class="login-png" />
-        <center><p class="login-p" style={({})}>Login with google to chat about bedwars 🛏️ with some super amazing minecrafters!
-          Please don't violate 😡 this community, if you do so your account will be terminated.
-          If you like this website consider <a href="https://github.com/nfhneevns/bedwars-chat" class="starring">starring</a> 🌟 it on github.</p> </center>
-      </div>
+      <center><Text h1 style={({ marginTop: '9rem' })}>Bedwars-chat</Text>
+        <Text h3>
+          Chat about bedwars with some super amazing minecrafters!
+        </Text></center>
+      <Grid.Container gap={1} justify="center" height="100px">
+        <Grid xs={2}><Button auto type="success" onClick={signInWithGoogle}>Login</Button></Grid>
+        <Grid xs={2}><Button auto type="success" onClick={() => {
+          window.open("http://github.com/paradoxns/bedwars-chat");
+        }}><Github size={24} /> <Spacer /> Github</Button></Grid>
+      </Grid.Container>
+
     </>
   )
 
@@ -65,7 +91,9 @@ function SignIn() {
 
 function SignOut() {
   return auth.currentUser && (
-    <center><button class="sign-out" onClick={() => auth.signOut()} style={({ marginTop: '0.8rem', marginLeft: '0.8rem' })}>Logout</button></center>
+    <center>
+      <Button auto type="success" onClick={() => auth.signOut()} style={({ marginTop: '0.8rem' })}>Logout</Button>
+    </center>
   )
 }
 
@@ -107,10 +135,10 @@ function ChatRoom() {
 
     <center><form onSubmit={sendMessage}>
 
-      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" class="input" style={({ width: 500 })} />
+      <Input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" style={({ color: 'white',})} />
+      <Button auto type="success" onClick={sendMessage}>send</Button>
 
-      <button type="submit" class="send" disabled={!formValue} style={({ margin: '0.8%'})}>send</button>
-
+      <Spacer />
     </form></center>
   </>)
 }
