@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import './App.css';
 import { GeistProvider, CssBaseline, Themes } from '@geist-ui/react'
 import { Github } from '@geist-ui/react-icons'
-import { Button, Text, Spacer, Grid, Input } from '@geist-ui/react'
+import { Button, Text, Spacer, Grid, Input, Tag } from '@geist-ui/react'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -101,7 +101,7 @@ function SignOut() {
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(25);
+  const query = messagesRef.orderBy('createdAt')
 
   const [messages] = useCollectionData(query, { idField: 'id' });
 
@@ -123,6 +123,13 @@ function ChatRoom() {
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
+  var today = new Date();
+
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  
+  var time = today.getHours() + ":" + today.getMinutes();
+  
+  var dateTime = date+' '+time;
 
   return (<>
     <main>
@@ -136,7 +143,7 @@ function ChatRoom() {
     <center><form onSubmit={sendMessage}>
 
       <Input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" style={({ color: 'white',})} />
-      <Button auto type="success" onClick={sendMessage}>send</Button>
+      <Button type="success" style={({ margin: 7})} auto type="success" onClick={sendMessage}>send</Button>
 
       <Spacer />
     </form></center>
@@ -148,12 +155,21 @@ function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
 
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+  var today = new Date();
+
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  
+  var time = today.getHours() + ":" + today.getMinutes();
+  
+  var dateTime = date+' '+time;
+
 
   return (<>
     <center><div className={`message ${messageClass}`}>
       <img class="pic" style={({ marginTop: '0.8%' })} src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-      <p class="message">{text}</p>
-    </div></center>
+      <p class="message">{text} {"                                                                                                        "}                     
+      <Tag >{dateTime}</Tag> </p> 
+    </div> </center>
   </>)
 }
 

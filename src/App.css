@@ -5,18 +5,20 @@ ul, li {
 }
 
 .message {
-  max-width: 500px;
+  max-width: 800px;
   margin-bottom: 12px;
   line-height: 24px;
   padding: 10px 20px;
-  border-radius: 25px;
+  border-radius: 8px;
   position: relative;
   text-align: center;
 }
-
+.message p{
+  display: inline-block;
+  word-wrap : break-word;
+}
 .message {
   display: flex;
-  align-items: center;
 }
 
 .sent {
@@ -26,7 +28,6 @@ ul, li {
 .sent p {
   color: white;
   background: #536DFE;
-  align-self: flex-end;
 }
 .received p {
   background: #F9A826;
